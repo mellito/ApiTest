@@ -23,14 +23,12 @@ const userSlice = createSlice({
   extraReducers: {
     [getUsers.pending]: (state) => {
       state.isLoading = true;
-      state.user = [];
     },
     [getUsers.fulfilled]: (state, action) => {
       state.user = action.payload;
       state.isLoading = false;
     },
     [getUsers.rejected]: (state) => {
-      state.user = [];
       state.isLoading = false;
     },
   },
