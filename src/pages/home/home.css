@@ -2,9 +2,25 @@ main {
   display: flex;
   height: 100vh;
 }
+.tableData {
+  text-align: center;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px 5px;
+  background-color: rgb(50, 47, 253);
+  overflow-y: auto;
+  color: white;
+}
 
 @media screen and (max-width: 800px) {
   main {
     flex-direction: column;
+  }
+  .tableData {
+    width: 100%;
+    height: 400px;
+    overflow-y: scroll;
   }
 }

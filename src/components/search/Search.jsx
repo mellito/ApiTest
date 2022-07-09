@@ -6,14 +6,9 @@ import "./search.css";
 function Search() {
   const dispatch = useDispatch();
 
-  const debounced = useDebouncedCallback(
-    // function
-    (value) => {
-      dispatch(searchValue(value));
-    },
-    // delay in ms
-    1000,
-  );
+  const debounced = useDebouncedCallback((value) => {
+    dispatch(searchValue(value));
+  }, 1000);
 
   return (
     <div>
