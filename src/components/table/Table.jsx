@@ -1,43 +1,23 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { useState } from "react";
 import { BarLoader } from "react-spinners";
 import { getId } from "../../feature/user/userSlice";
 import "./table.css";
+
 import Search from "../search/Search";
 
-function Table() {
-  const [filterUser, setFilterUser] = useState([]);
+function Table({ filterUSer }) {
   const dispatch = useDispatch();
   const [tableTitle] = useState(["NOMBRE", "CORREO", "CIUDAD"]);
-  const user = useSelector((state) => state.user);
+  const loading = useSelector((state) => state.user.isLoading);
   const handleIdUser = (id) => {
     dispatch(getId(id));
   };
 
-  useEffect(() => {
-    if (user.searchValue) {
-      setFilterUser(
-        user.user.filter(
-          (userData) =>
-            userData.name
-              .toLowerCase()
-              .includes(user.searchValue.toLowerCase()) ||
-            userData.email
-              .toLowerCase()
-              .includes(user.searchValue.toLowerCase()) ||
-            userData.address.city
-              .toLowerCase()
-              .includes(user.searchValue.toLowerCase()),
-        ),
-      );
-    } else {
-      setFilterUser(user.user);
-    }
-  }, [user.searchValue, user.user]);
-
   return (
     <section className="tableData">
-      {user.isLoading ? (
+      {loading ? (
         <section className="tableLoading">
           <BarLoader color="white" />
         </section>
@@ -55,7 +35,7 @@ function Table() {
             </thead>
 
             <tbody>
-              {filterUser.map((userData) => (
+              {filterUSer.map((userData) => (
                 <tr
                   key={userData.id}
                   onClick={() => {
@@ -75,4 +55,15 @@ function Table() {
   );
 }
 
+Table.propTypes = {
+  filterUSer: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      email: PropTypes.string,
+      address: PropTypes.shape({
+        city: PropTypes.string,
+      }),
+    }),
+  ).isRequired,
+};
 export default Table;
