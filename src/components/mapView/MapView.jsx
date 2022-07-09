@@ -5,7 +5,7 @@ import "./mapView.css";
 
 function MapView({ lat, lng, address }) {
   return (
-    <MapContainer center={[lat, lng]} zoom={1} scrollWheelZoom>
+    <MapContainer center={[lat, lng]} zoom={1} scrollWheelZoom={false}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

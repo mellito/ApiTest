@@ -1,0 +1,16 @@
+.cardContainer > h2 {
+  text-transform: capitalize;
+  letter-spacing: 0.5rem;
+}
+.cardContainer article {
+  width: 400px;
+  display: flex;
+  gap: 10px;
+  margin: 0 auto;
+}
+.cardContainer p {
+  font-size: 1.5rem;
+  font-weight: lighter;
+  text-transform: capitalize;
+  color: rgb(0, 0, 0);
+}

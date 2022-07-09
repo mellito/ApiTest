@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import getUsers from "./services/users";
-import MainRoute from "./components/MainRoute";
+import MainRoute from "./components/mainRoute/MainRoute";
 
 function App() {
   const dispatch = useDispatch();

@@ -38,36 +38,36 @@ function Table() {
   return (
     <section className="tableData">
       {user.isLoading ? (
-        <BarLoader
-          color="white"
-          cssOverride={{
-            display: "block",
-            margin: "0 auto",
-          }}
-        />
+        <section className="tableLoading">
+          <BarLoader color="white" />
+        </section>
       ) : (
         <>
           <h1>USUARIOS</h1>
           <Search />
           <table className="tableContainer">
-            <tr>
-              {tableTitle.map((title) => (
-                <th key={title}>{title}</th>
-              ))}
-            </tr>
-
-            {filterUser.map((userData) => (
-              <tr
-                key={userData.id}
-                onClick={() => {
-                  handleIdUser(userData.id);
-                }}
-              >
-                <td>{userData.name}</td>
-                <td>{userData.email}</td>
-                <td>{userData.address.city}</td>
+            <thead>
+              <tr>
+                {tableTitle.map((title) => (
+                  <th key={title}>{title}</th>
+                ))}
               </tr>
-            ))}
+            </thead>
+
+            <tbody>
+              {filterUser.map((userData) => (
+                <tr
+                  key={userData.id}
+                  onClick={() => {
+                    handleIdUser(userData.id);
+                  }}
+                >
+                  <td>{userData.name}</td>
+                  <td>{userData.email}</td>
+                  <td>{userData.address.city}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </>
       )}

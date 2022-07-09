@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState, useMemo } from "react";
 import MapView from "../mapView/MapView";
 import "./usercard.css";
+import CardContiner from "../cardContainer/CardContiner";
 
 function UserCard() {
   const [filterUser, setFilterUser] = useState([]);
@@ -12,7 +13,7 @@ function UserCard() {
     () => user.filter((userData) => userData.id === id),
     [id, user],
   );
-  console.log(userF);
+
   useEffect(() => {
     if (id) {
       setFilterUser(userF);
@@ -20,20 +21,42 @@ function UserCard() {
   }, [id, user]);
 
   return (
-    <section className="userCardContainer">
-      {!!filterUser.length && (
+    <section
+      className={
+        filterUser.length ? "userCardContainer" : "userCardContainer--empty"
+      }
+    >
+      {filterUser.length ? (
         <>
           <h1>DATOS GENERALES</h1>
-          <p>Nombre: {filterUser[0].name}</p>
-          <p>Correo: {filterUser[0].email}</p>
-          <p>ciudad{filterUser[0].address.city}</p>
-          <p>Phone {filterUser[0].phone}</p>
-          <MapView
-            lat={filterUser[0].address.geo.lat}
-            lng={filterUser[0].address.geo.lng}
-            address={filterUser[0].address.street}
-          />
+          <CardContiner title="Datos personales">
+            <p> {filterUser[0].name}</p>
+            <p> {filterUser[0].email}</p>
+            <p> {filterUser[0].phone}</p>
+          </CardContiner>
+
+          <CardContiner title="Datos compania">
+            <p> {filterUser[0].company.name}</p>
+            <p> {filterUser[0].company.catchPhrase}</p>
+            <p>{filterUser[0].company.bs}</p>
+          </CardContiner>
+          <CardContiner title="Direccion">
+            <p> {filterUser[0].address.city}</p>
+            <p> {filterUser[0].address.street}</p>
+            <p> {filterUser[0].address.suite}</p>
+            <p> {filterUser[0].address.zipcode}</p>
+          </CardContiner>
+
+          <CardContiner title="UBICACION">
+            <MapView
+              lat={filterUser[0].address.geo.lat}
+              lng={filterUser[0].address.geo.lng}
+              address={filterUser[0].address.street}
+            />
+          </CardContiner>
         </>
+      ) : (
+        <p>Elige cliente porfavor</p>
       )}
     </section>
   );
