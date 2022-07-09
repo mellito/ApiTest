@@ -1,0 +1,11 @@
+.userCardContainer {
+  text-align: center;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px 0px;
+  background-color: white;
+  overflow-y: auto;
+  color: rgb(50, 47, 253);
+}
